@@ -29,23 +29,22 @@
 {
      <script>
          $(".button").click(function () {
-            $.ajax({
-                url: '@Url.Action("Save", "Module")',
-                type:'post',
-                data:$("form").serialize(),
-                success: function(data){
-                    if (data.code === 200) {
-                        //假设这是iframe页
-                        parent.location.reload();
-                        var index=parent.layer.getFrameIndex(window.name);//先得到当前iframe层的索引
-                        parent.layer.close(index);//在执行关闭
-                    }
-                    else {
-                        alert("提交失败");
-                    }
-                }
-            })
-        });
+             $.ajax({
+                 url: '@Url.Action("Save", "Module")',
+                 type: 'post',
+                 data: $("form").serialize(),
+                 success: function(data) {
+                     if (data.code === 200) {
+                         //假设这是iframe页
+                         parent.location.reload();
+                         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                         parent.layer.close(index); //在执行关闭
+                     } else {
+                         alert("提交失败");
+                     }
+                 }
+             });
+         });
 </script>
 }
 

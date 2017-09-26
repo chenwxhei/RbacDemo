@@ -164,6 +164,8 @@
     <Content Include="Views\Module\Create.cshtml" />
     <Content Include="Views\_LayoutForm.cshtml" />
     <Content Include="Views\Module\Edit.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

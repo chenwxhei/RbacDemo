@@ -1,0 +1,45 @@
+﻿@model RbacDemo.Models.Role
+
+@{
+    ViewBag.Title = "角色管理-编辑";
+    Layout = "~/Views/_LayoutForm.cshtml";
+}
+
+<form class="bootstrap-frm">
+    <h1>角色管理 - 编辑</h1>
+    <label>
+        <span>ID</span>
+        <input type="text" name="id" value="@Model.Id" readonly="" />
+    </label>
+    <label>
+        <span>用户名称</span>
+        <input type="text" name="name" value="@Model.Name" placeholder="请输入用户名称" />
+    </label>
+    <label>
+        <span>&nbsp;</span>
+        <input type="button" class="button" value="提交" />
+    </label>
+</form>
+
+@section Script
+{
+    <script>
+        $(".button").click(function () {
+            $.ajax({
+                url: '@Url.Action("Save","Role")',
+                type: 'post',
+                data: $("form").serialize(),
+                success: function(data) {
+                    if (data.code === 200) {
+                        //假设这是iframe页
+                        parent.location.reload();
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //在执行关闭
+                    } else {
+                        alert("提交失败");
+                    }
+                }
+            });
+        });
+    </script>
+}
