@@ -1,0 +1,65 @@
+﻿@model IEnumerable<RbacDemo.Models.Module>
+
+@{ 
+    ViewBag.Title = "模块管理";
+}
+
+<form id="search">
+    <input type="text" placeholder="名称" />
+    <input type="text" placeholder="控制器" />
+    <input type="button" value="查询" />
+</form>
+
+<a id="create" href="#">新增</a>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>名称</th>
+        <th>控制器</th>
+        <th>操作</th>
+    </tr>
+    
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Controller</td>
+                <td style="width:100px">
+                    <a class="edit" href="@Url.Action("Edit",new { id=item.Id})">编辑</a>
+                    @Html.ActionLink("删除", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+            
+</table>
+
+@section Script
+{
+    <script>
+        $("#create").click(function () {
+            layer.open({
+                type: 2,
+                title: '模块管理-新增',
+                shadeClose: true,
+                shade: false,
+                area:['500px','350px'],
+                content: '@Url.Action("Create")'
+            });
+        });
+
+        $(".edit").click(function (event) {
+            var $this = $(this);
+            layer.open({
+                type: 2,
+                title: '模块管理-编辑',
+                shadeClose: true,
+                shade: false,
+                area: ['500px', '400px'],
+                content: $this.attr("href")
+            });
+            event.preventDefault();
+        });
+    </script>
+}
+

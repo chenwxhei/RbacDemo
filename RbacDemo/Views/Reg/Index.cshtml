@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>RBAC Demo - 注册</title>
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <div id="login">
+        <span class="form-title">注册</span>
+        <form action="#" method="post">
+            <div class="form-item">
+                <label>账号:</label>
+                <input type="text" name="username" />
+            </div>
+
+            <div class="form-item">
+                <label>密码:</label>
+                <input type="password" name="password" />
+            </div>
+            <div class="form-item">
+                <label>密码:</label>
+                <input type="password" name="repassword" />
+            </div> 
+            <input class="btn" type="button" value="注册" />
+        </form>
+    </div>
+
+    <script>
+        $(function () {
+            $(".btn").click(function () {
+                var username = $("input[name=username]").val();
+                var password = $("input[name=password]").val();
+                var repass = $("input[name=repassword]").val();
+
+                if (username === "" || password === "" || repass === "") {
+                    alert("账号或密码不能为空");
+                    return;
+                }
+
+                if (password !== repass) {
+                    alert("两次密码必须一致");
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("Reg")',
+                    type: 'post',
+                    data: $("form").serialize(),
+                    success:function(res){
+                        if (res.code === 200) {
+                            alert("注册成功");
+                            window.location='@Url.Action("Index", "Login")';
+                        } else if (res.code === 400) {
+                            alert("非法参数");
+                        }
+                        else {
+                            alert("注册失败，用户名或密码错误");
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+</html>
+

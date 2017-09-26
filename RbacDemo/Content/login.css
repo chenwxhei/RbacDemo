@@ -1,0 +1,41 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%;
+    text-align:center;
+}
+
+#login {
+	padding: 15px 0;
+	background-color: #F8F8FF;
+	margin-top: 100px;
+}
+.form-title {
+	padding: 10px;
+	display: block;
+	font-weight: bold;
+}
+.form-item {
+	font-size: 14px;
+	line-height: 36px;
+}
+
+.form-item input {
+	height: 26px;
+}
+
+.btn {
+ 	background-color: #555555; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor:pointer;
+}

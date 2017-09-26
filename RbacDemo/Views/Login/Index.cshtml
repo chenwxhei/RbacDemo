@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>RBAC Demo - 登陆</title>
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <div id="login">
+        <span class="form-title">登陆</span>
+        <form action="#" method="post">
+            <div class="form-item">
+                <label>账号:</label>
+                <input type="text" name="username" />
+            </div>
+
+            <div class="form-item">
+                <label>密码:</label>
+                <input type="password" name="password" />
+            </div>
+            <input class="btn" type="button" value="登陆" />
+        </form>
+    </div>
+    @Html.ActionLink("注册", "Index", "Reg")
+    <script>
+        $(function () {
+            $(".btn").click(function () {
+                var username = $("input[name=username]").val();
+                var password = $("input[name=password]").val();
+
+                if(username===""||password===""){
+                    alert("账号或密码不能为空");
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("Login")',
+                    type: 'post',
+                    data: $("form").serialize(),
+                    success:function(res){
+                        if(res.code===200){
+                            window.location='@Url.Action("Index", "Home")';
+                        } else if (res.code === 400) {
+                            alert("非法参数");
+                        }
+                        else {
+                            alert("登陆失败，用户名或密码错误");
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+</html>
